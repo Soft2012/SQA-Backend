@@ -15,10 +15,6 @@ app.use(bodyParser.json());
 app.post("/test", (req,res)=>{
   fileContent = req.body.text
 
-  res.send({
-    text: "qqqqqqqqqqqqqqqqqqqqqqqq",
-  });
-
   // Spawn a Python process to run the script
   const pythonProcess = spawn('python', ['script.py', `${fileContent}`]);
 
