@@ -21,7 +21,7 @@ app.post("/test", (req,res)=>{
   console.log("Generating...............")
 
   res.send({
-          text: data.toString(),
+          text: fileContent,
         });
 
   // let hasResponseSent = false; 
