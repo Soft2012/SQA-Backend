@@ -16,7 +16,7 @@ app.post("/test", (req,res)=>{
   fileContent = req.body.text
 
   // Spawn a Python process to run the script
-  const pythonProcess = spawn('python', ['script.py', `${fileContent}`]);
+  // const pythonProcess = spawn('python', ['script.py', `${fileContent}`]);
 
   console.log("Generating...............")
 
