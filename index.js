@@ -16,44 +16,37 @@ app.post("/test", (req,res)=>{
   fileContent = req.body.text
 
   // Spawn a Python process to run the script
-  // const pythonProcess = spawn('python', ['script.py', `${fileContent}`]);
+  const pythonProcess = spawn('python', ['script.py', `${fileContent}`]);
 
-  console.log("Generating...............")
+  let hasResponseSent = false; 
 
-  res.send({
-          text: fileContent,
+  // Handle the script's output (stdout)
+  pythonProcess.stdout.on('data', (data) => {
+    if (!hasResponseSent) {
+        hasResponseSent = true;
+        res.send({
+          text: data.toString(),
         });
+      }
+  });
 
-  // let hasResponseSent = false; 
-  // // Handle the script's output (stdout)
-  // pythonProcess.stdout.on('data', (data) => {
-  //   if (!hasResponseSent) {
-  //       console.log(`Finished................`);
-  //       hasResponseSent = true;
-  //       res.send({
-  //         text: data.toString(),
-  //       });
-  //     }
-  // });
+  // Handle any errors (stderr)
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`Error: ${data.toString()}`);
+    if (!hasResponseSent) {
+      hasResponseSent = true;
+      res.status(500).send("An error occurred while processing the script.");
+    }
+  });
 
-  // // Handle any errors (stderr)
-  // pythonProcess.stderr.on('data', (data) => {
-  //   console.error(`Error: ${data.toString()}`);
-  //   if (!hasResponseSent) {
-  //     hasResponseSent = true;
-  //     res.status(500).send("An error occurred while processing the script.");
-  //   }
-  // });
-
-  // // Handle the close event when the script finishes
-  // pythonProcess.on('close', (code) => {
-  //   console.log(`Python script exited with code ${code}`);
-  //   if (!hasResponseSent) {
-  //     res.end(); // Only call res.end() if no other response has been sent.
-  //   }
-  // });
+  // Handle the close event when the script finishes
+  pythonProcess.on('close', (code) => {
+    console.log(`Python script exited with code ${code}`);
+    if (!hasResponseSent) {
+      res.end(); // Only call res.end() if no other response has been sent.
+    }
+  });
 })
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
 });
