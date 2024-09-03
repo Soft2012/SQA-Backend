@@ -105,9 +105,11 @@ def main():
         name = "World"
    
     # Example usage
-    file_path = name  # Replace with the path to your text document
-    document_content = read_document(file_path)
+    # file_path = name  # Replace with the path to your text document
+    # document_content = read_document(file_path)
 
+
+    document_content = name
     # Split the document into chunks
     chunks = split_document(document_content)
 
