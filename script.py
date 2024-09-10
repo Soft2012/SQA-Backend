@@ -159,47 +159,49 @@ async def main():
     else:
         file_content = "World"
    
-    chunks = segment_section(optimize_document(file_content))
+    # chunks = segment_section(optimize_document(file_content))
 
-    all_test_cases = []
-    for chunk in chunks:
-        prompt = generate_prompt(chunk)
-        try:
-            test_cases = await chatgpt_api_request(prompt)
-            all_test_cases.append(test_cases)
-        except Exception as error:
-            print(f"Error calling ChatGPT API: {error}")
+    # all_test_cases = []
+    # for chunk in chunks:
+    #     prompt = generate_prompt(chunk)
+    #     try:
+    #         test_cases = await chatgpt_api_request(prompt)
+    #         all_test_cases.append(test_cases)
+    #     except Exception as error:
+    #         print(f"Error calling ChatGPT API: {error}")
 
-    test_case_list = []
-    for test_case in all_test_cases:
-        print(test_case)
-        json_obj = json.loads(test_case)
-        child_list = json_obj["test_cases"]
-        for one_child in child_list:
-            test_case_list.append(one_child)
+    # test_case_list = []
+    # for test_case in all_test_cases:
+    #     print(test_case)
+    #     json_obj = json.loads(test_case)
+    #     child_list = json_obj["test_cases"]
+    #     for one_child in child_list:
+    #         test_case_list.append(one_child)
 
-    output_string = f"Total Count: {len(test_case_list)}\n\n"
+    # output_string = f"Total Count: {len(test_case_list)}\n\n"
 
-    id = 1
-    for test_case in test_case_list:
-        test_step_string = ""
-        test_step = test_case["Test Steps"]
-        step_id = 1
-        for step in test_step:
-            test_step_string += f"{step_id}. {step}\n"
-            step_id += 1
+    # id = 1
+    # for test_case in test_case_list:
+    #     test_step_string = ""
+    #     test_step = test_case["Test Steps"]
+    #     step_id = 1
+    #     for step in test_step:
+    #         test_step_string += f"{step_id}. {step}\n"
+    #         step_id += 1
         
-        output_string += (
-            f"Test Case {id}\n"
-            f"Title: {test_case['Title']}\n"
-            f"Description: {test_case['Description']}\n"
-            f"Test Steps:\n{test_step_string}"
-            f"Expected Outcome: {test_case['Expected Outcome']}\n"
-            f"Priority: {test_case['Priority']}\n\n"
-        )
-        id += 1
+    #     output_string += (
+    #         f"Test Case {id}\n"
+    #         f"Title: {test_case['Title']}\n"
+    #         f"Description: {test_case['Description']}\n"
+    #         f"Test Steps:\n{test_step_string}"
+    #         f"Expected Outcome: {test_case['Expected Outcome']}\n"
+    #         f"Priority: {test_case['Priority']}\n\n"
+    #     )
+    #     id += 1
 
-    print(output_string)
+    # print(output_string)
+
+    print("qqqqqqqqqqqqqqqqq")
 
 if __name__ == "__main__":
     asyncio.run(main())
