@@ -20,7 +20,7 @@ app.post("/test", (req,res)=>{
   });
 
   // Spawn a Python process to run the script
-  const pythonProcess = spawn('python', ['script.py', `${fileContent}`]);
+  const pythonProcess = spawn('python3', ['script.py', `${fileContent}`]);
 
   let hasResponseSent = false; 
 
