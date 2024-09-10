@@ -24,6 +24,7 @@ app.post("/test", (req,res)=>{
   pythonProcess.stdout.on('data', (data) => {
     if (!hasResponseSent) {
         hasResponseSent = true;
+        console.log(data.toString())
         res.send({
           text: data.toString(),
         });
@@ -49,4 +50,5 @@ app.post("/test", (req,res)=>{
 })
 
 app.listen(port, () => {
+  console.log("Start Server ... ... ...")
 });
