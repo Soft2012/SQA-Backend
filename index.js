@@ -15,9 +15,7 @@ app.use(bodyParser.json());
 app.post("/test", (req,res)=>{
   fileContent = req.body.text
 
-  res.send({
-    text: "qqqqqqqqqqqqqqqqq",
-  });
+ 
 
   // Spawn a Python process to run the script
   const pythonProcess = spawn('python3', ['script.py', `${fileContent}`]);
@@ -50,6 +48,10 @@ app.post("/test", (req,res)=>{
     if (!hasResponseSent) {
       res.end(); // Only call res.end() if no other response has been sent.
     }
+  });
+
+  res.send({
+    text: "qqqqqqqqqqqqqqqqq",
   });
 })
 
