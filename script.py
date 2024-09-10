@@ -151,7 +151,7 @@
 
 #     return response['choices'][0]['message']['content']
 
-async def main():
+def main():
     # file_content = "Your file content here"
     # # Simple example that reads input from command line arguments
     # if len(sys.argv) > 1:
