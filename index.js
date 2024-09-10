@@ -38,7 +38,7 @@ app.post("/test", (req,res)=>{
     console.error(`Error: ${data.toString()}`);
     if (!hasResponseSent) {
       hasResponseSent = true;
-      res.status(500).send("An error occurred while processing the script.");
+      //res.status(500).send("An error occurred while processing the script.");
     }
   });
 
@@ -46,7 +46,7 @@ app.post("/test", (req,res)=>{
   pythonProcess.on('close', (code) => {
     console.log(`Python script exited with code ${code}`);
     if (!hasResponseSent) {
-      res.end(); // Only call res.end() if no other response has been sent.
+      //res.end(); // Only call res.end() if no other response has been sent.
     }
   });
 
