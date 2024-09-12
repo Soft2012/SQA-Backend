@@ -9,8 +9,13 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://automatic-testcase-generation.vercel.app',
+  methods: 'GET,POST',
+  allowedHeaders: 'Content-Type,Authorization'
+}));
 app.use(bodyParser.json());
+app.options('*', cors());  // Enables pre-flight across-the-board
 
 app.post("/test", async (req,res)=>{
   chunk = req.body.chunk
@@ -21,11 +26,7 @@ app.post("/test", async (req,res)=>{
     console.log(test_cases)
     try {
       const testcases_obj = await JSON.parse(test_cases);
-      
-      // Add CORS headers
-      res.setHeader('Access-Control-Allow-Origin', 'https://automatic-testcase-generation.vercel.app');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
       res.send({testcases:testcases_obj})
     } catch (error) {
       console.error('Json Parse Error:', error.response ? error.response.data : error.message);
