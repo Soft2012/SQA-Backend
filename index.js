@@ -9,7 +9,7 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: 'https://automatic-testcase-generation.vercel.app' }));
 app.use(bodyParser.json());
 
 app.post("/test", async (req,res)=>{
