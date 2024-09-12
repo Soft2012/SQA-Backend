@@ -9,7 +9,7 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors({ origin: 'https://automatic-testcase-generation.vercel.app' }));
+app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/test", async (req,res)=>{
@@ -61,7 +61,7 @@ app.post("/test", async (req,res)=>{
     }
 
     // Add CORS headers
-    res.setHeader('Access-Control-Allow-Origin', 'https://automatic-testcase-generation.vercel.app');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.send({text:out_put_string})
