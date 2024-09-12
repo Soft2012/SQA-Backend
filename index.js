@@ -21,14 +21,15 @@ app.post("/test", async (req,res)=>{
     console.log(test_cases)
     try {
       const testcases_obj = await JSON.parse(test_cases);
+      
+      // Add CORS headers
+      res.setHeader('Access-Control-Allow-Origin', 'https://automatic-testcase-generation.vercel.app');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
       res.send({testcases:testcases_obj})
     } catch (error) {
       console.error('Json Parse Error:', error.response ? error.response.data : error.message);
     }
-    // Add CORS headers
-    res.setHeader('Access-Control-Allow-Origin', 'https://automatic-testcase-generation.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   } 
   catch (error) {
       console.error('Error calling ChatGPT API:', error.response ? error.response.data : error.message);
