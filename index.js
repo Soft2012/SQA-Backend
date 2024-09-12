@@ -9,13 +9,8 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: 'https://automatic-testcase-generation.vercel.app' }));
 app.use(bodyParser.json());
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Allows access from any origin
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.post("/test", async (req,res)=>{
   chunk = req.body.chunk
