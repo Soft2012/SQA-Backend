@@ -60,6 +60,10 @@ app.post("/test", async (req,res)=>{
       id++;
     }
 
+    // Add CORS headers
+    res.setHeader('Access-Control-Allow-Origin', 'https://automatic-testcase-generation.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.send({text:out_put_string})
   } 
   catch (error) {
